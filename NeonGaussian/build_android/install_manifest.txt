@@ -1,0 +1,1 @@
+/home/mi/workspaces/guide/NeonGaussian/build_android/install/bin/gaussian_example

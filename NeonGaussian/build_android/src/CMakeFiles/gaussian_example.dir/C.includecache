@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../src/inc/data_type.h
+
+../src/inc/gaussian3x3.h
+math.h
+-
+stdio.h
+-
+data_type.h
+../src/inc/data_type.h
+
+/home/mi/workspaces/guide/NeonGaussian/src/test/example.c
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+sys/time.h
+-
+data_type.h
+/home/mi/workspaces/guide/NeonGaussian/src/test/data_type.h
+gaussian3x3.h
+/home/mi/workspaces/guide/NeonGaussian/src/test/gaussian3x3.h
+
+/home/mi/workspaces/guide/NeonGaussian/src/test/gaussian3x3_neon.c
+gaussian3x3.h
+/home/mi/workspaces/guide/NeonGaussian/src/test/gaussian3x3.h
+arm_neon.h
+-
+
