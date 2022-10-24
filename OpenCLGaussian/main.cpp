@@ -142,17 +142,18 @@ int main()
 
     printf("global_work_size=(%zu,%zu)\n", global_work_size[0], global_work_size[1]);
     printf("local_work_size=(%zu,%zu)\n", local_work_size[0], local_work_size[1]);
-    cl_event kernel_event = NULL;
     gettimeofday(&start, NULL);
     for (int i = 0; i < c_loop_count; i++)
     {
+        cl_event kernel_event = NULL;
         err_num = clEnqueueNDRangeKernel(command_queue, kernel, 2, NULL, global_work_size,
                                          local_work_size, 0, NULL, &kernel_event);
         CheckClStatus(err_num, "ClEnqueueNDRangeKernel");
         err_num = clWaitForEvents(1, &kernel_event);
         CheckClStatus(err_num, "ClWaitForEvents");
+        PrintProfilingInfo(kernel_event);
+        clReleaseEvent(kernel_event);
     }
-    PrintProfilingInfo(kernel_event);
     PrintDuration(&start, "OpenCL Gaussian", c_loop_count);
 
     err_num = clEnqueueReadBuffer(command_queue, buffer_dst, CL_TRUE, 0, buffer_size_in_bytes,
@@ -166,7 +167,6 @@ int main()
     free(host_src_matrix);
     free(host_gaussian_matrix);
     free(device_gaussian_matrix);
-    clReleaseEvent(kernel_event);
     clReleaseMemObject(buffer_src);
     clReleaseMemObject(buffer_dst);
 
